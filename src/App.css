@@ -13,3 +13,10 @@
 .error-message {
   color: red;
 }
+
+.active-filter{
+  background: deepskyblue;
+}
+.is-done {
+  opacity: 0.5;
+}
