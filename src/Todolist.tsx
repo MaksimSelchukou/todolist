@@ -5,9 +5,9 @@ import {TaskType} from "./App";
 type TodolistType = {
     tasks: Array<TaskType>
     title: string
-    removeTask: (taskID: number) => void
+    removeTask: (taskID: string) => void
     addTask: (valueTask: string) => void
-    changeStatus: (taskID: number, isDone: boolean) => void
+    changeStatus: (taskID: string, isDone: boolean) => void
 }
 type FilterValueType = "all" | "active" | "completed"
 
@@ -33,7 +33,7 @@ export const Todolist = (props: TodolistType) => {
     }
 
     //Обработчики событий
-    const onClickDeleteTaskHandler = (taskID: number) => {
+    const onClickDeleteTaskHandler = (taskID: string) => {
         props.removeTask(taskID)
     }
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +58,7 @@ export const Todolist = (props: TodolistType) => {
             }
         }
     }
-    const onChangeStatusHandler = (taskID: number, event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeStatusHandler = (taskID: string, event: ChangeEvent<HTMLInputElement>) => {
         props.changeStatus(taskID, event.currentTarget.checked)
     }
 
