@@ -1,4 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {TextField} from "@mui/material";
+
+
 
 type AddItemFormType={
     todolistID:string
@@ -37,9 +43,12 @@ export const AddItemForm = (props:AddItemFormType) => {
 
     return (
         <div>
-            <input onKeyPress={enterAddHandler} value={valueInput} onChange={onChangeInputHandler}
+            {/*<input onKeyPress={enterAddHandler} value={valueInput} onChange={onChangeInputHandler}*/}
+            {/*       className={error ? "error" : ""}/>*/}
+            <TextField size={"medium"} autoComplete={"off"} error={!!error} onKeyPress={enterAddHandler} value={valueInput} onChange={onChangeInputHandler}
                    className={error ? "error" : ""}/>
-            <button onClick={addTaskHandler}>+</button>
+            <IconButton size="large" onClick={addTaskHandler}>+</IconButton>
+            {/*<button onClick={addTaskHandler}>+</button>*/}
             {error && <div className="error-message">{error}</div>}
         </div>
     );
