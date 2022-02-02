@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {TaskStateType} from "../App";
 import {addTask, changeStatusTask, changeTitleTask, removeTask, tasksReducer} from "./tasks-reducer";
+import {removeTodolist} from "./todolists-reducer";
 
 
 test.skip('correct task should be added from correct array', () => {
@@ -73,11 +74,9 @@ test.skip('status of specified task should be changed', () => {
     expect(endState['todolistId1'][0].isDone).toBe(false)
 })
 
-test('title of specified task should be changed', () => {
-
+test.skip('title of specified task should be changed', () => {
 
     const newTitle = "NEW TASKKKK"
-
     const startState: TaskStateType = {
         "todolistId1": [
             {id: "1", title: "HTML&CSS", isDone: true},
@@ -94,4 +93,26 @@ test('title of specified task should be changed', () => {
 
     expect(endState["todolistId2"].length).toBe(2)
     expect(endState['todolistId2'][1].title).toBe(newTitle)
+})
+
+test('property with todolistId should be deleted', () => {
+
+    const startState: TaskStateType = {
+        "todolistId1": [
+            {id: "1", title: "HTML&CSS", isDone: true},
+            {id: "2", title: "JS", isDone: true},
+        ],
+        "todolistId2": [
+            {id: "1", title: "HTML&CSS", isDone: false},
+            {id: "2", title: "JS", isDone: true},
+        ]
+    };
+
+
+    const endState = tasksReducer(startState, removeTodolist("todolistId2"))
+    const keys = Object.keys(endState)
+
+
+    expect(keys.length).toBe(1)
+    expect(endState["todolistId2"]).toBeUndefined()
 })
