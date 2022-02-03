@@ -1,10 +1,10 @@
 import {v1} from "uuid";
 import {TaskStateType} from "../App";
-import {addTask, changeStatusTask, changeTitleTask, removeTask, tasksReducer} from "./tasks-reducer";
-import {removeTodolist} from "./todolists-reducer";
+import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
+import {removeTodolistAC} from "./todolists-reducer";
 
 
-test.skip('correct task should be added from correct array', () => {
+test('correct task should be added from correct array', () => {
 
     let newTitle = 'NEW TASK'
 
@@ -27,14 +27,14 @@ test.skip('correct task should be added from correct array', () => {
     };
 
 
-    const endState = tasksReducer(startState, addTask(newTitle, "todolistId1"))
+    const endState = tasksReducer(startState, addTaskAC(newTitle, "todolistId1"))
 
     expect(endState["todolistId1"].length).toBe(6)
     expect(endState['todolistId1'][0].title).toBe(newTitle)
 })
 
 
-test.skip('correct task should be remove from correct array', () => {
+test('correct task should be remove from correct array', () => {
 
     const startState: TaskStateType = {
         "todolistId1": [
@@ -48,13 +48,13 @@ test.skip('correct task should be remove from correct array', () => {
     };
 
 
-    const endState = tasksReducer(startState, removeTask("1", "todolistId1"))
+    const endState = tasksReducer(startState, removeTaskAC("1", "todolistId1"))
 
     expect(endState["todolistId1"].length).toBe(1)
     expect(endState['todolistId1'][0].id).toBe("2")
 })
 
-test.skip('status of specified task should be changed', () => {
+test('status of specified task should be changed', () => {
 
     const startState: TaskStateType = {
         "todolistId1": [
@@ -68,13 +68,13 @@ test.skip('status of specified task should be changed', () => {
     };
 
 
-    const endState = tasksReducer(startState, changeStatusTask("1", false, "todolistId1"))
+    const endState = tasksReducer(startState, changeStatusTaskAC("1", false, "todolistId1"))
 
     expect(endState["todolistId1"].length).toBe(2)
     expect(endState['todolistId1'][0].isDone).toBe(false)
 })
 
-test.skip('title of specified task should be changed', () => {
+test('title of specified task should be changed', () => {
 
     const newTitle = "NEW TASKKKK"
     const startState: TaskStateType = {
@@ -89,7 +89,7 @@ test.skip('title of specified task should be changed', () => {
     };
 
 
-    const endState = tasksReducer(startState, changeTitleTask(newTitle, "todolistId2", "2"))
+    const endState = tasksReducer(startState, changeTitleTaskAC(newTitle, "todolistId2", "2"))
 
     expect(endState["todolistId2"].length).toBe(2)
     expect(endState['todolistId2'][1].title).toBe(newTitle)
@@ -109,7 +109,7 @@ test('property with todolistId should be deleted', () => {
     };
 
 
-    const endState = tasksReducer(startState, removeTodolist("todolistId2"))
+    const endState = tasksReducer(startState, removeTodolistAC("todolistId2"))
     const keys = Object.keys(endState)
 
 
