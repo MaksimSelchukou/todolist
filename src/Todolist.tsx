@@ -1,5 +1,5 @@
-import React, {KeyboardEvent, ChangeEvent, useState} from 'react';
-import {TaskStateType, TaskType} from "./App";
+import React, {ChangeEvent} from 'react';
+import {TaskStateType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, Checkbox} from "@mui/material";
@@ -8,7 +8,6 @@ import {Delete} from "@mui/icons-material";
 
 //Типизация Тудулиста
 type TodolistType = {
-    // tasks: Array<TaskType>
     tasks: TaskStateType
     title: string
     removeTask: (taskID: string, todolistID: string) => void
@@ -26,10 +25,6 @@ export type FilterValueType = "all" | "active" | "completed"
 
 export const Todolist = (props: TodolistType) => {
 
-    //Фильтрация тасок
-    // const changeFilterTaskHandler = (value: FilterValueType, TodoID: string) => {
-    //     props.changeFilterTask(value, TodoID)
-    // }
 
 
     const changeFilterTaskCompletedHandler = () => {props.changeFilterTask('completed', props.todolistID)}
@@ -73,16 +68,12 @@ export const Todolist = (props: TodolistType) => {
         <div>
             <h3>
                 <EditableSpan title={props.title} onChange={changeTitleTodolistHandler}/>
-                {/*<button onClick={deleteTodolistHandler}>del</button>*/}
+
                 <Button onClick={deleteTodolistHandler}>del</Button>
             </h3>
 
             <div>
-                <AddItemForm addItem={addTaskHandler} todolistID={props.todolistID}/>
-                {/*<input onKeyPress={enterAddHandler} value={valueInput} onChange={onChangeInputHandler}*/}
-                {/*       className={error ? "error" : ""}/>*/}
-                {/*<button onClick={addTaskHandler}>+</button>*/}
-                {/*{error && <div className="error-message">{error}</div>}*/}
+                <AddItemForm addItem={addTaskHandler} />
             </div>
             <ul>
                 {filteredTasks.map(t => <li key={t.id} className={t.isDone ? "is-done" : ""}>
@@ -95,15 +86,9 @@ export const Todolist = (props: TodolistType) => {
             <div>
                 <Button size={"small"}  variant={props.filter === "all" ? 'contained' : 'text'}
                         onClick={changeFilterTaskAllHandler}>ALL</Button>
-                {/*<Button className={props.filter === "active" ? 'active-filter' : ''}*/}
-                {/*        onClick={() => changeFilterTaskHandler("active", props.todolistID)}>Active*/}
-                {/*</Button>*/}
                 <Button size={"small"}  variant={props.filter === "active" ? 'contained' : 'text'}
                         onClick={changeFilterTaskActiveHandler}>Active
                 </Button>
-                {/*<Button color={'secondary'} className={props.filter === "completed" ? 'active-filter' : ''}*/}
-                {/*        onClick={() => changeFilterTaskHandler("completed", props.todolistID)}>Completed*/}
-                {/*</Button>*/}
                 <Button size={"small"} color={'secondary'} variant={props.filter === "completed" ? 'contained' : 'text'}
                         onClick={changeFilterTaskCompletedHandler}>Completed
                 </Button>

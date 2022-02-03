@@ -11,7 +11,11 @@ const CHANGE_FILTER_TODOLIST = 'CHANGE-FILTER-TODOLIST'
 type ActionsType = addTodolistType | removeTodolistType | changeTitleTodolistType | changeFilterTodolistType;
 
 
-export const todolistsReducer = (state: Array<TodolistsType>, action: ActionsType): Array<TodolistsType> => {
+const initialState:Array<TodolistsType> = [
+
+]
+
+export const todolistsReducer = (state: Array<TodolistsType> = initialState, action: ActionsType): Array<TodolistsType> => {
     switch (action.type) {
         case ADD_TODOLIST: {
             let newTodolist: TodolistsType = {id: action.todoID, title: action.title, filter: "all"}
