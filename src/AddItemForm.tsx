@@ -3,13 +3,13 @@ import IconButton from '@mui/material/IconButton';
 import {TextField} from "@mui/material";
 
 
-type AddItemFormType={
-    // todolistID:string
+type AddItemFormType = {
     addItem: (valueTask: string) => void
 }
 
 
-export const AddItemForm = (props:AddItemFormType) => {
+export const AddItemForm = React.memo ((props: AddItemFormType) => {
+    console.log('Add item form is called')
 
     let [error, setError] = useState<string | null>(null)
     const [valueInput, setValueInput] = useState('')
@@ -40,14 +40,13 @@ export const AddItemForm = (props:AddItemFormType) => {
 
     return (
         <div>
-            {/*<input onKeyPress={enterAddHandler} value={valueInput} onChange={onChangeInputHandler}*/}
-            {/*       className={error ? "error" : ""}/>*/}
-            <TextField size={"medium"} autoComplete={"off"} error={!!error} onKeyPress={enterAddHandler} value={valueInput} onChange={onChangeInputHandler}
-                   className={error ? "error" : ""}/>
+
+            <TextField size={"medium"} autoComplete={"off"} error={!!error} onKeyPress={enterAddHandler}
+                       value={valueInput} onChange={onChangeInputHandler}
+                       className={error ? "error" : ""}/>
             <IconButton size="large" onClick={addTaskHandler}>+</IconButton>
-            {/*<button onClick={addTaskHandler}>+</button>*/}
             {error && <div className="error-message">{error}</div>}
         </div>
     );
-};
+});
 
