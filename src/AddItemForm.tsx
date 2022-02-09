@@ -33,7 +33,7 @@ export const AddItemForm = React.memo ((props: AddItemFormType) => {
                 props.addItem(valueInput)
                 setValueInput('')
             } else {
-                setError('Ошибка')
+                setError('Введите корректный список дел')
             }
         }
     }
